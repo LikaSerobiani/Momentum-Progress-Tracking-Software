@@ -8,7 +8,12 @@ export default {
         fredokaOne: ["Fredoka One", "sans-serif"],
         firaGo: ["FiraGO", "sans-serif"],
       },
-      colors: {},
+      colors: {
+        primary: "#8338EC",
+        secondary: "#B588F4",
+        white: "#FFFFFF",
+        grey: "#212529",
+      },
     },
   },
   plugins: [],

@@ -15,10 +15,10 @@ export default function Header() {
         </div>
         {/* buttons */}
         <div className="flex gap-[40px]">
+          <Button title="თანამშრომლის შექმნა" variant="secondary" />
           <Button title="შექმენი ახალი დავალება" variant="primary">
             <Plus color="#FFFFFF" />
           </Button>
-          <Button title="შექმენი ახალი დავალება" variant="secondary" />
         </div>
       </div>
     </header>

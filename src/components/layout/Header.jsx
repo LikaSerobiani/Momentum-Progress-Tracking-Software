@@ -18,11 +18,14 @@ export default function Header() {
     navigate("/tasks/create");
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
   return (
     <header className="bg-white">
       <div className="flex items-center w-full max-w-[87.5%] m-auto py-[30px] justify-between">
         {/* logo */}
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={handleLogoClick}>
           <h1 className="font-fredokaOne text-[31px] text-[#8338EC] leading-[100%] ">
             Momentum
           </h1>

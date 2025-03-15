@@ -6,16 +6,14 @@ import {
 } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Header from "./components/layout/Header";
 import Layout from "./components/layout/Layout";
-
 import TasksList from "./pages/tasks/TasksList";
 import TaskDetails from "./pages/tasks/TaskDetails";
 import CreateTask from "./pages/tasks/CreateTask";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
+    <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="tasks">
         <Route index element={<TasksList />} />
@@ -27,14 +25,7 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return (
-    <>
-      <Header />
-      <Layout>
-        <RouterProvider router={router} />
-      </Layout>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

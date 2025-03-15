@@ -1,14 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Logo from "../../assets/images/Hourglass.png";
 import Button from "../common/Button";
 import Plus from "../common/icons/Plus";
 import CreateEmployeeModal from "../common/Modals/CreateEmployee";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
+
+  const handleAddTask = () => {
+    navigate("/tasks/create");
+  };
+
   return (
     <header className="bg-white">
       <div className="flex items-center w-full max-w-[87.5%] m-auto py-[30px] justify-between">
@@ -26,7 +35,11 @@ export default function Header() {
             variant="secondary"
             onClick={handleShow}
           />
-          <Button title="შექმენი ახალი დავალება" variant="primary">
+          <Button
+            title="შექმენი ახალი დავალება"
+            variant="primary"
+            onClick={handleAddTask}
+          >
             <Plus color="#FFFFFF" />
           </Button>
         </div>

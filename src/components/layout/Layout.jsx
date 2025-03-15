@@ -1,8 +1,14 @@
-const Layout = ({ children }) => {
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
+
+const Layout = () => {
   return (
-    <div className="w-full max-w-[87.5%] m-auto mt-[40px] pb-[152px]">
-      {children}
-    </div>
+    <>
+      <Header />
+      <div className="w-full max-w-[87.5%] m-auto mt-[40px] pb-[152px]">
+        <Outlet />
+      </div>
+    </>
   );
 };
 

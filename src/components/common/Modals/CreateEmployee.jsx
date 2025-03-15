@@ -78,6 +78,7 @@ export default function CreateEmployee({ showModal, handleClose }) {
                     touched={touched.name}
                     minLengthValidationText="მინიმუმ 2 სიმბოლო"
                     maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
+                    width="w-[384px]"
                   />
                   <Input
                     label="გვარი"
@@ -90,6 +91,7 @@ export default function CreateEmployee({ showModal, handleClose }) {
                     touched={touched.surname}
                     minLengthValidationText="მინიმუმ 2 სიმბოლო"
                     maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
+                    width="w-[384px]"
                   />
                 </div>
                 <FileUploader

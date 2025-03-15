@@ -76,7 +76,8 @@ export default function CreateEmployee({ showModal, handleClose }) {
                     onBlur={handleBlur}
                     error={errors.name}
                     touched={touched.name}
-                    initialMessage="მინიმუმ 2 სიმბოლო"
+                    minLengthValidationText="მინიმუმ 2 სიმბოლო"
+                    maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
                   />
                   <Input
                     label="გვარი"
@@ -87,7 +88,8 @@ export default function CreateEmployee({ showModal, handleClose }) {
                     onBlur={handleBlur}
                     error={errors.surname}
                     touched={touched.surname}
-                    initialMessage="მინიმუმ 2 სიმბოლო"
+                    minLengthValidationText="მინიმუმ 2 სიმბოლო"
+                    maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
                   />
                 </div>
                 <FileUploader

@@ -66,7 +66,7 @@ const FileUploader = ({ onFileChange, error }) => {
         )}
       </div>
       {error && (
-        <div className="flex items-center gap-1 text-[14px] font-normal text-error font-firaGo">
+        <div className="flex items-center gap-1 text-[14px] font-normal text-red font-firaGo">
           <ExclamationMark color="#F93B1D" />
           <span>{error}</span>
         </div>

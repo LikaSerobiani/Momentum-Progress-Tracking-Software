@@ -1,8 +1,14 @@
+import React, { useState } from "react";
 import Logo from "../../assets/images/Hourglass.png";
 import Button from "../common/Button";
 import Plus from "../common/icons/Plus";
+import CreateEmployeeModal from "../common/Modals/CreateEmployee";
 
 export default function Header() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
   return (
     <header className="bg-white">
       <div className="flex items-center w-full max-w-[87.5%] m-auto py-[30px] justify-between">
@@ -15,12 +21,17 @@ export default function Header() {
         </div>
         {/* buttons */}
         <div className="flex gap-[40px]">
-          <Button title="თანამშრომლის შექმნა" variant="secondary" />
+          <Button
+            title="თანამშრომლის შექმნა"
+            variant="secondary"
+            onClick={handleShow}
+          />
           <Button title="შექმენი ახალი დავალება" variant="primary">
             <Plus color="#FFFFFF" />
           </Button>
         </div>
       </div>
+      <CreateEmployeeModal showModal={showModal} handleClose={handleClose} />
     </header>
   );
 }

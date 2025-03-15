@@ -14,12 +14,13 @@ export default function Input({
   minLengthValidationText,
   touched,
   maxLengthValidationText,
+  width,
 }) {
   const hasError = error;
   const isValid = !hasError && value?.length > 0;
 
   return (
-    <div className="w-[384px] flex flex-col gap-[5px]">
+    <div className={`${width} flex flex-col gap-[5px]`}>
       <label
         htmlFor={id || "inputField"}
         className="font-firaGo font-bold text-[14px] leading-[16.8px] text-gray-subheadline"
@@ -40,7 +41,6 @@ export default function Input({
             : "border-borderGray"
         }`}
       />
-
       <div className="text-[14px] font-firaGo">
         <div className="text-[14px] font-firaGo">
           {!isValid && !hasError && !touched && (
@@ -97,4 +97,5 @@ Input.propTypes = {
   touched: PropTypes.bool,
   firstValidation: PropTypes.string.isRequired,
   secondValidation: PropTypes.string.isRequired,
+  width: PropTypes.string,
 };

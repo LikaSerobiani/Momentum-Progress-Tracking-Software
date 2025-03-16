@@ -8,15 +8,18 @@ import Selector from "../../components/common/Selector";
 import useDepartmentStore from "../../stores/UseDepartmentStore";
 import useStatusStore from "../../stores/UseStatusStore";
 import usePriorityStore from "../../stores/usePriorityStore";
+import useEmployeeStore from "../../stores/UseEmployeeStore";
 
 export default function CreateTask() {
   const { departments, fetchDepartments } = useDepartmentStore();
   const { statuses, fetchStatuses } = useStatusStore();
   const { priorities, fetchPriorities } = usePriorityStore();
+  const { employees, fetchEmployees } = useEmployeeStore();
 
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,13 +27,14 @@ export default function CreateTask() {
         fetchStatuses();
         fetchDepartments();
         fetchPriorities();
+        fetchEmployees();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [fetchDepartments, fetchStatuses, fetchPriorities]);
+  }, [fetchDepartments, fetchStatuses, fetchPriorities, fetchEmployees]);
 
   useEffect(() => {
     if (statuses.length > 0 && !selectedStatus) {
@@ -55,6 +59,7 @@ export default function CreateTask() {
             department_id: "",
             status_id: selectedStatus ? selectedStatus.id : "",
             priority_id: "",
+            employee_id: "",
           }}
           validationSchema={taskValidationSchema}
           // onSubmit={handleSubmit}
@@ -90,6 +95,23 @@ export default function CreateTask() {
                   width="w-[550px]"
                 />
                 <Selector
+                  label="პასუხისმგებელი თანამშრომელი"
+                  name="employee_id"
+                  id="employee_id"
+                  options={employees.map((employee) => employee.name)}
+                  selectedOption={selectedEmployee ? selectedEmployee.name : ""}
+                  onSelect={(name) => {
+                    const selected = employees.find(
+                      (employee) => employee.name === name
+                    );
+                    setSelectedEmployee(selected);
+                    setFieldValue("employee_id", selected?.id || "");
+                  }}
+                  error={touched.employee_id && errors.employee_id}
+                  width="w-[550px]"
+                />
+
+                <Selector
                   label="სტატუსი"
                   name="status_id"
                   id="status_id"
@@ -121,6 +143,7 @@ export default function CreateTask() {
                   error={touched.priority_id && errors.priority_id}
                   width="w-[259px]"
                 />
+
                 <Input
                   label="სათაური"
                   id="name"

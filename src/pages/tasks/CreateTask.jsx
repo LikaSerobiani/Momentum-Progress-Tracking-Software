@@ -45,6 +45,12 @@ export default function CreateTask() {
     }
   }, [statuses, selectedStatus]);
 
+  const filteredEmployees = selectedDepartment
+    ? employees.filter(
+        (employee) => employee.department.id === selectedDepartment.id
+      )
+    : [];
+
   return (
     <div className="flex flex-col">
       <h2 className="font-firaGo font-bold text-[34px] leading-[100%] text-gray-headline mb-[25px]">
@@ -89,28 +95,36 @@ export default function CreateTask() {
                       (department) => department.name === name
                     );
                     setSelectedDepartment(selected);
-                    setFieldValue("department_id", selected?.id);
+                    setFieldValue("department_id", selected?.id || "");
+
+                    setSelectedEmployee(null);
+                    setFieldValue("employee_id", "");
                   }}
                   error={touched.department_id && errors.department_id}
                   width="w-[550px]"
                 />
-                <Selector
-                  label="პასუხისმგებელი თანამშრომელი"
-                  name="employee_id"
-                  id="employee_id"
-                  options={employees.map((employee) => employee.name)}
-                  selectedOption={selectedEmployee ? selectedEmployee.name : ""}
-                  onSelect={(name) => {
-                    const selected = employees.find(
-                      (employee) => employee.name === name
-                    );
-                    setSelectedEmployee(selected);
-                    setFieldValue("employee_id", selected?.id || "");
-                  }}
-                  error={touched.employee_id && errors.employee_id}
-                  width="w-[550px]"
-                />
 
+                {selectedDepartment && (
+                  <Selector
+                    label="პასუხისმგებელი თანამშრომელი"
+                    name="employee_id"
+                    id="employee_id"
+                    options={filteredEmployees.map((employee) => employee.name)}
+                    selectedOption={
+                      selectedEmployee ? selectedEmployee.name : ""
+                    }
+                    onSelect={(name) => {
+                      const selected = filteredEmployees.find(
+                        (employee) => employee.name === name
+                      );
+                      setSelectedEmployee(selected);
+                      setFieldValue("employee_id", selected?.id || "");
+                    }}
+                    error={touched.employee_id && errors.employee_id}
+                    width="w-[550px]"
+                    showAddEmployeeOption={true}
+                  />
+                )}
                 <Selector
                   label="სტატუსი"
                   name="status_id"

@@ -10,4 +10,5 @@ export const taskValidationSchema = Yup.object().shape({
     .max(255, "მაქსიმუმ 255 სიმბოლო"),
   department_id: Yup.string().required("დეპარტამენტის არჩევა სავალდებულოა"),
   status_id: Yup.string().required("სტატუსის არჩევა სავალდებულოა"),
+  priority_id: Yup.string().required("პრიორიტეტის არჩევა სავალდებულოა"),
 });

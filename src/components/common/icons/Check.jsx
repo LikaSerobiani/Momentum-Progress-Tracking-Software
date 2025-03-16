@@ -11,9 +11,9 @@ export default function Check({ color }) {
         <path
           d="M12.3334 1.33325L5.00008 8.66659L1.66675 5.33325"
           stroke={color}
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

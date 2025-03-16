@@ -36,25 +36,23 @@ export default function Textarea({
         style={{ resize: "none", outline: "none" }}
       ></textarea>
 
-      <div className="text-[14px] font-firaGo">
-        <div className="text-[14px] font-firaGo">
-          {!isValid && !hasError && !touched && (
-            <>
-              <div className="flex items-center gap-1">
-                <CheckIcon color="#6C757D" />
-                <span className="text-gray-validation">
-                  {minLengthValidationText}
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
-                <CheckIcon color="#6C757D" />
-                <span className="text-gray-validation">
-                  {maxLengthValidationText}
-                </span>
-              </div>
-            </>
-          )}
-        </div>
+      <div className="text-[10px] font-firaGo">
+        {!isValid && !hasError && !touched && (
+          <>
+            <div className="flex items-center gap-1">
+              <CheckIcon color="#6C757D" />
+              <span className="text-gray-validation">
+                {minLengthValidationText}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <CheckIcon color="#6C757D" />
+              <span className="text-gray-validation">
+                {maxLengthValidationText}
+              </span>
+            </div>
+          </>
+        )}
 
         {isValid && !hasError && (
           <>

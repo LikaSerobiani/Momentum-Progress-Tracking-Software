@@ -41,8 +41,8 @@ export default function Input({
             : "border-borderGray"
         }`}
       />
-      <div className="text-[14px] font-firaGo">
-        <div className="text-[14px] font-firaGo">
+      <div className="text-[10px] font-firaGo">
+        <div className="text-[10px] font-firaGo">
           {!isValid && !hasError && !touched && (
             <>
               <div className="flex items-center gap-1">

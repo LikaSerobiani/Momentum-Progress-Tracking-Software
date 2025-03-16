@@ -7,26 +7,30 @@ import { taskValidationSchema } from "../../validation/taskValidationSchema";
 import Selector from "../../components/common/Selector";
 import useDepartmentStore from "../../stores/UseDepartmentStore";
 import useStatusStore from "../../stores/UseStatusStore";
+import usePriorityStore from "../../stores/usePriorityStore";
 
 export default function CreateTask() {
   const { departments, fetchDepartments } = useDepartmentStore();
   const { statuses, fetchStatuses } = useStatusStore();
+  const { priorities, fetchPriorities } = usePriorityStore();
 
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         fetchStatuses();
         fetchDepartments();
+        fetchPriorities();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [fetchDepartments, fetchStatuses]);
+  }, [fetchDepartments, fetchStatuses, fetchPriorities]);
 
   useEffect(() => {
     if (statuses.length > 0 && !selectedStatus) {
@@ -50,6 +54,7 @@ export default function CreateTask() {
             description: "",
             department_id: "",
             status_id: selectedStatus ? selectedStatus.id : "",
+            priority_id: "",
           }}
           validationSchema={taskValidationSchema}
           // onSubmit={handleSubmit}
@@ -98,6 +103,22 @@ export default function CreateTask() {
                     setFieldValue("status_id", selected?.id);
                   }}
                   error={touched.status_id && errors.status_id}
+                  width="w-[259px]"
+                />
+                <Selector
+                  label="პრიორიტეტი"
+                  name="priority_id"
+                  id="priority_id"
+                  options={priorities.map((priority) => priority.name)}
+                  selectedOption={selectedPriority ? selectedPriority.name : ""}
+                  onSelect={(name) => {
+                    const selected = priorities.find(
+                      (priority) => priority.name === name
+                    );
+                    setSelectedPriority(selected);
+                    setFieldValue("priority_id", selected?.id);
+                  }}
+                  error={touched.priority_id && errors.priority_id}
                   width="w-[259px]"
                 />
                 <Input

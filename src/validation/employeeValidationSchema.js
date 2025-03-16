@@ -23,4 +23,5 @@ export const employeeValidationSchema = Yup.object().shape({
       "მაქსიმუმ 600KB",
       (value) => value && value.size <= 600000
     ),
+  department_id: Yup.string().required("დეპარტამენტი სავალდებულოა"),
 });

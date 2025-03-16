@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import Button from "../Button";
 import FileUploader from "../FileUploader";
@@ -8,20 +8,36 @@ import CloseIcon from "../Icons/Close";
 import useEmployeeStore from "../../../stores/UseEmployeeStore";
 import SuccessModal from "./Success";
 import { employeeValidationSchema } from "../../../validation/employeeValidationSchema";
+import useDepartmentStore from "../../../stores/UseDepartmentStore";
+import Selector from "../Selector";
 
 export default function CreateEmployee({ showModal, handleClose }) {
   const { addEmployee } = useEmployeeStore();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  const { departments, fetchDepartments } = useDepartmentStore();
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        fetchDepartments();
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [fetchDepartments]);
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       await addEmployee(values);
       resetForm();
+      handleClose();
       setShowSuccessModal(true);
-
       setTimeout(() => {
         setShowSuccessModal(false);
-        handleClose();
       }, 2000);
     } catch (error) {
       console.log(error);
@@ -51,6 +67,7 @@ export default function CreateEmployee({ showModal, handleClose }) {
               name: "",
               surname: "",
               avatar: null,
+              department_id: "",
             }}
             validationSchema={employeeValidationSchema}
             onSubmit={handleSubmit}
@@ -97,6 +114,24 @@ export default function CreateEmployee({ showModal, handleClose }) {
                 <FileUploader
                   onFileChange={(file) => setFieldValue("avatar", file)}
                   error={touched.avatar && errors.avatar}
+                />
+                <Selector
+                  label="დეპარტამენტი"
+                  name="department_id"
+                  id="department_id"
+                  options={departments.map((department) => department.name)}
+                  selectedOption={
+                    selectedDepartment ? selectedDepartment.name : ""
+                  }
+                  onSelect={(name) => {
+                    const selected = departments.find(
+                      (department) => department.name === name
+                    );
+                    setSelectedDepartment(selected);
+                    setFieldValue("department_id", selected?.id);
+                  }}
+                  error={touched.department_id && errors.department_id}
+                  width="w-[384px]"
                 />
                 <div className="flex justify-end gap-[15px]">
                   <Button

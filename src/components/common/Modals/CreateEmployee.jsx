@@ -30,12 +30,18 @@ export default function CreateEmployee({ showModal, handleClose }) {
     fetchData();
   }, [fetchDepartments]);
 
+  const handleModalClose = () => {
+    setSelectedDepartment(null);
+    handleClose();
+  };
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       await addEmployee(values);
       resetForm();
       handleClose();
       setShowSuccessModal(true);
+      setSelectedDepartment(null);
       setTimeout(() => {
         setShowSuccessModal(false);
       }, 2000);
@@ -52,9 +58,9 @@ export default function CreateEmployee({ showModal, handleClose }) {
         showModal={showSuccessModal}
         handleClose={() => setShowSuccessModal(false)}
       />
-      <Modal isModalOpen={showModal} onClose={handleClose} padding="50px">
+      <Modal isModalOpen={showModal} onClose={handleModalClose} padding="50px">
         <div className="flex justify-end mb-[37px] cursor-pointer">
-          <button onClick={handleClose}>
+          <button onClick={handleModalClose}>
             <CloseIcon />
           </button>
         </div>
@@ -137,7 +143,7 @@ export default function CreateEmployee({ showModal, handleClose }) {
                   <Button
                     variant="secondary"
                     title="გაუქმება"
-                    onClick={handleClose}
+                    onClick={handleModalClose}
                   />
 
                   <Button

@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { fetchTasks, addTask, fetchCurrentTask } from "../services/taskService";
+import {
+  fetchTasks,
+  addTask,
+  fetchCurrentTask,
+  updateTaskStatus,
+} from "../services/taskService";
 
 const useTaskStore = create((set) => ({
   tasks: [],
@@ -28,6 +33,16 @@ const useTaskStore = create((set) => ({
       const addedTask = await addTask(newTask);
       set((state) => ({
         tasks: [...state.tasks, addedTask],
+      }));
+    } catch (error) {
+      console.error(error.message);
+    }
+  },
+  updateTaskStatus: async (taskId, statusId) => {
+    try {
+      await updateTaskStatus(taskId, statusId);
+      set((state) => ({
+        currentTask: { ...state.currentTask, status: { id: statusId } },
       }));
     } catch (error) {
       console.error(error.message);

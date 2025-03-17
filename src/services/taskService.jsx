@@ -30,3 +30,14 @@ export const addTask = async (task) => {
     throw new Error("Error adding task");
   }
 };
+
+export const updateTaskStatus = async (taskId, statusId) => {
+  try {
+    const response = await axios.put(`/tasks/${taskId}`, {
+      status_id: statusId,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Error updating task status");
+  }
+};

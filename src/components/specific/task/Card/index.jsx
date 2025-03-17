@@ -14,6 +14,7 @@ export default function Card({
   department,
   employee,
   priority,
+  borderColor,
 }) {
   const navigate = useNavigate();
 
@@ -22,8 +23,9 @@ export default function Card({
   };
   return (
     <div
-      className="bg-white w-[381px] border rounded-2xl p-[20px] flex gap-7 flex-col border-borderGray"
+      className="bg-white w-[381px] border rounded-2xl p-[20px] flex gap-7 flex-col"
       onClick={handleCardClick}
+      style={{ borderColor: borderColor }}
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-[10px]">

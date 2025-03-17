@@ -20,7 +20,7 @@ export default function TaskList({ tasks }) {
       <h2 className="font-firaGo font-bold text-[34px] leading-[100%] text-gray-headline mb-[25px]">
         დავალებების გვერდი
       </h2>
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-wrap gap-[52px]">
         {tasks.map((task) => (
           <Card
             key={task.id}

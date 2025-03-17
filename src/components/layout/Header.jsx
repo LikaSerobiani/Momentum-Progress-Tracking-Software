@@ -23,7 +23,7 @@ export default function Header() {
   };
   return (
     <header className="bg-white">
-      <div className="flex items-center w-full max-w-[87.5%] m-auto py-[30px] justify-between">
+      <div className="flex items-center w-full max-w-[1680px] mx-auto py-[30px] justify-between">
         {/* logo */}
         <div
           className="flex items-center cursor-pointer"

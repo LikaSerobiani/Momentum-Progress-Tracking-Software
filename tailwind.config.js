@@ -16,6 +16,7 @@ export default {
         green: "#08A508",
         red: "#FA4D4D",
         borderGray: "#CED4DA",
+        pink: "#FF66A8",
         gray: {
           10: "#F8F9FA", // 1%
           100: "#DEE2E6", // 10%

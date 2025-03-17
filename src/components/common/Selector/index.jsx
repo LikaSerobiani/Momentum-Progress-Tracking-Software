@@ -55,11 +55,11 @@ export default function Selector({
           onClick={toggleDropdown}
           id={id}
           name={name}
-          className={`${width} border border-borderGray flex items-center justify-between p-[10px] gap-[10px] bg-white ${
+          className={`${width} border border-borderGray flex items-center justify-between p-[14px] gap-[10px] bg-white ${
             isOpen ? "rounded-t-[5px]" : "rounded-[5px]"
           }`}
         >
-          <span className="font-firaGo text-[14px] text-gray-blackish">
+          <span className="font-firaGo text-[14px] text-gray-blackish leading-[100%]">
             {selectedOption || "აირჩიე"}
           </span>
           <ArrowDown />

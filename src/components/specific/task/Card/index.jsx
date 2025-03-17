@@ -21,9 +21,10 @@ export default function Card({
   const handleCardClick = () => {
     navigate(`/tasks/${id}`);
   };
+
   return (
     <div
-      className="bg-white w-[381px] border rounded-2xl p-[20px] flex gap-7 flex-col"
+      className="bg-white w-[381px] border rounded-2xl p-[20px] flex gap-7 flex-col cursor-pointer"
       onClick={handleCardClick}
       style={{ borderColor: borderColor }}
     >

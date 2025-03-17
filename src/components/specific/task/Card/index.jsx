@@ -1,19 +1,30 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import { formatDueDate } from "../../../../utils/dateUtils";
 import DepartmentTag from "../DepartmentTag";
 import PriorityTag from "../PriorityTag";
 import CommentIcon from "../../../common/Icons/Comment";
 
-const Card = ({
+export default function Card({
+  id,
   name,
   description,
   due_date,
   department,
   employee,
   priority,
-}) => {
+}) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/tasks/${id}`);
+  };
   return (
-    <div className="bg-white w-[381px] border rounded-2xl p-[20px] flex gap-7 flex-col border-borderGray">
+    <div
+      className="bg-white w-[381px] border rounded-2xl p-[20px] flex gap-7 flex-col border-borderGray"
+      onClick={handleCardClick}
+    >
       <div className="flex justify-between items-center">
         <div className="flex gap-[10px]">
           <PriorityTag label={priority.name} icon={priority.icon} />
@@ -50,6 +61,4 @@ const Card = ({
       </div>
     </div>
   );
-};
-
-export default Card;
+}

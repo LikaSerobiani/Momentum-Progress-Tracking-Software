@@ -7,7 +7,7 @@ import {
 
 import Home from "./pages/Home";
 import Layout from "./components/layout/Layout";
-import TasksList from "./pages/tasks/TasksList";
+import TaskList from "./pages/tasks/TaskList";
 import TaskDetails from "./pages/tasks/TaskDetails";
 import CreateTask from "./pages/tasks/CreateTask";
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="tasks">
-        <Route index element={<TasksList />} />
+        <Route index element={<TaskList />} />
         <Route path=":id" element={<TaskDetails />} />
         <Route path="create" element={<CreateTask />} />
       </Route>

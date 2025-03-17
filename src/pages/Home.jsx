@@ -1,22 +1,20 @@
 import React, { useEffect } from "react";
 import useTaskStore from "../stores/useTaskStore";
+import useStatusStore from "../stores/useStatusStore";
 import TaskList from "./tasks/TaskList";
-import Statuses from "../components/specific/task/TaskStatuses/Statuses";
 
 export default function Home() {
   const { tasks, fetchTasks } = useTaskStore();
+  const { statuses, fetchStatuses } = useStatusStore();
 
   useEffect(() => {
     fetchTasks();
-  }, [fetchTasks]);
+    fetchStatuses();
+  }, [fetchTasks, fetchStatuses]);
 
   return (
     <div>
-      <h2 className="font-firaGo font-bold text-[34px] leading-[100%] text-gray-headline mb-[25px]">
-        დავალებების გვერდი
-      </h2>
-      <Statuses />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} statuses={statuses} />
     </div>
   );
 }

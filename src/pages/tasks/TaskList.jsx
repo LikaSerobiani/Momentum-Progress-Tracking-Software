@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Card from "../../components/specific/task/Card";
 import Loading from "../../components/common/Loading";
+import Statuses from "../../components/specific/task/TaskStatuses/Statuses";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, statuses }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,19 +16,12 @@ export default function TaskList({ tasks }) {
   }
 
   return (
-    <div className="flex flex-wrap gap-[52px]">
-      {tasks.map((task) => (
-        <Card
-          key={task.id}
-          id={task.id}
-          name={task.name}
-          description={task.description}
-          due_date={task.due_date}
-          department={task.department}
-          employee={task.employee}
-          priority={task.priority}
-        />
-      ))}
+    <div>
+      <h2 className="font-firaGo font-bold text-[34px] leading-[100%] text-gray-headline mb-[25px]">
+        დავალებების გვერდი
+      </h2>
+
+      <Statuses statuses={statuses} tasks={tasks} />
     </div>
   );
 }

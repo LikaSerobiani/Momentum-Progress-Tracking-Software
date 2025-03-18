@@ -63,8 +63,14 @@ export default function TaskDetails() {
         {/* description */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-[18px]">
-            <PriorityTag label={priority?.name} icon={priority?.icon} />
-            {department && <DepartmentTag label={department.name} />}
+            <PriorityTag
+              label={priority?.name}
+              icon={priority?.icon}
+              textSize="text-[16px]"
+            />
+            {department && (
+              <DepartmentTag label={department.name} textSize="text-[16px]" />
+            )}
           </div>
           <div className="flex flex-col gap-[26px]">
             <p className="text-[34px] font-semibold text-firaGo text-gray-headline">

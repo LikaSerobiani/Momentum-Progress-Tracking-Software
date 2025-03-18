@@ -182,7 +182,7 @@ export default function CreateTask() {
                   touched={touched.description}
                   minLengthValidationText="მინიმუმ 4 სიმბოლო"
                   maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
-                  width="w-[550px]"
+                  width="550px"
                 />
               </div>
               <Button

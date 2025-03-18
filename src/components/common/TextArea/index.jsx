@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import ExclamationMarkIcon from "../Icons/ExclamationMark";
 import CheckIcon from "../Icons/Check";
+import Button from "../Button";
 
 export default function Textarea({
   label,
@@ -15,32 +16,53 @@ export default function Textarea({
   disableValidation = false,
   width = "100%",
   placeholder,
+  showSubmitButton = false,
+  onSubmit,
+  borderRadius = "6px",
 }) {
   const hasError = !disableValidation && error;
   const isValid = !disableValidation && !hasError && value.length > 0;
 
   return (
-    <div className="flex flex-col gap-[5px]">
+    <div className="flex flex-col gap-[5px] relative">
       <label className="font-firaGo font-bold text-[14px] text-gray-subheadline">
         {label}
       </label>
-      <textarea
-        id={id}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        onBlur={onBlur}
-        className={`${width} h-[135px] p-[10px] gap-[10px] rounded-[6px] border ${
-          disableValidation
-            ? "border-borderGray"
-            : hasError
-            ? "border-red"
-            : isValid
-            ? "border-green"
-            : "border-borderGray"
-        }`}
-        style={{ resize: "none", outline: "none" }}
-      ></textarea>
+      <div className="relative">
+        <textarea
+          id={id}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          onBlur={onBlur}
+          className={`h-[135px] p-[10px] gap-[10px] border pr-[50px] ${
+            disableValidation
+              ? "border-borderGray"
+              : hasError
+              ? "border-red"
+              : isValid
+              ? "border-green"
+              : "border-borderGray"
+          }`}
+          style={{
+            width,
+            resize: "none",
+            outline: "none",
+            borderRadius,
+          }}
+        ></textarea>
+
+        {showSubmitButton && (
+          <Button
+            title="დააკომენტარე"
+            type="button"
+            onClick={onSubmit}
+            disabled={!value.trim()}
+            className="absolute bottom-[20px] right-[20px]"
+            variant="roundedFull"
+          />
+        )}
+      </div>
 
       {!disableValidation && (
         <div className="text-[10px] font-firaGo">
@@ -97,4 +119,6 @@ Textarea.propTypes = {
   maxLengthValidationText: PropTypes.string,
   touched: PropTypes.bool,
   disableValidation: PropTypes.bool,
+  showSubmitButton: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };

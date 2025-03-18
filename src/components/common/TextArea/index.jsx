@@ -14,6 +14,7 @@ export default function Textarea({
   maxLengthValidationText,
   disableValidation = false,
   width = "100%",
+  placeholder,
 }) {
   const hasError = !disableValidation && error;
   const isValid = !disableValidation && !hasError && value.length > 0;
@@ -27,6 +28,7 @@ export default function Textarea({
         id={id}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         onBlur={onBlur}
         className={`${width} h-[135px] p-[10px] gap-[10px] rounded-[6px] border ${
           disableValidation

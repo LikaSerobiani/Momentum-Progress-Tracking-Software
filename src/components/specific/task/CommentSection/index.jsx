@@ -41,7 +41,7 @@ const CommentSection = ({ taskId }) => {
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
         disableValidation={true}
-        showSubmitButton={true}
+        showCommentButton={true}
         placeholder="დაწერე კომენტარი"
         onSubmit={handleSubmit}
         borderRadius="10px"
@@ -93,18 +93,15 @@ const CommentSection = ({ taskId }) => {
             {/* reply input */}
             {replyingTo === comment.id && (
               <div className="mt-2 ml-4">
-                <textarea
+                <Textarea
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
-                  placeholder="დაწერეთ პასუხი..."
+                  placeholder="უპასუხე"
+                  disableValidation={true}
+                  showCommentButton={true}
+                  onSubmit={() => handleReplySubmit(comment.id)}
+                  borderRadius="10px"
                 />
-
-                <button
-                  onClick={() => handleReplySubmit(comment.id)}
-                  disabled={!replyText.trim()}
-                >
-                  პასუხის დამატება
-                </button>
               </div>
             )}
 

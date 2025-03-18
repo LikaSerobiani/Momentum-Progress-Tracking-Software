@@ -5,10 +5,10 @@ import Button from "../../components/common/Button";
 import { Formik, Form } from "formik";
 import { taskValidationSchema } from "../../validation/taskValidationSchema";
 import Selector from "../../components/common/Selector";
-import useDepartmentStore from "../../stores/UseDepartmentStore";
-import useStatusStore from "../../stores/UseStatusStore";
-import usePriorityStore from "../../stores/usePriorityStore";
-import useEmployeeStore from "../../stores/UseEmployeeStore";
+import useDepartmentStore from "../../stores/DepartmentStore";
+import useStatusStore from "../../stores/StatusStore";
+import usePriorityStore from "../../stores/PriorityStore";
+import useEmployeeStore from "../../stores/EmployeeStore";
 
 export default function CreateTask() {
   const { departments, fetchDepartments } = useDepartmentStore();

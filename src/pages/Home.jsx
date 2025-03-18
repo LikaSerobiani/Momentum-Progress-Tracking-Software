@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import useTaskStore from "../stores/useTaskStore";
-import useStatusStore from "../stores/useStatusStore";
+import useTaskStore from "../stores/TaskStore";
+import useStatusStore from "../stores/StatusStore";
 import TaskList from "./tasks/TaskList";
 
 export default function Home() {

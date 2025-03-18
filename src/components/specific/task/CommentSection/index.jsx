@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useCommentStore from "../../../../stores/UseCommentStore";
+import useCommentStore from "../../../../stores/CommentStore";
 import Textarea from "../../../common/TextArea";
 import Button from "../../../common/Button";
 import LeftIcon from "../../../common/Icons/Left";

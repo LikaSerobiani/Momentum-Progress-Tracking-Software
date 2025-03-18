@@ -5,10 +5,10 @@ import FileUploader from "../FileUploader";
 import Modal from "../Modals/Modal";
 import Input from "../Input";
 import CloseIcon from "../Icons/Close";
-import useEmployeeStore from "../../../stores/UseEmployeeStore";
+import useEmployeeStore from "../../../stores/EmployeeStore";
 import SuccessModal from "./Success";
 import { employeeValidationSchema } from "../../../validation/employeeValidationSchema";
-import useDepartmentStore from "../../../stores/UseDepartmentStore";
+import useDepartmentStore from "../../../stores/DepartmentStore";
 import Selector from "../Selector";
 
 export default function CreateEmployee({ showModal, handleClose }) {

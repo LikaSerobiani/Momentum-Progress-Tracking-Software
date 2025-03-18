@@ -9,6 +9,8 @@ import useDepartmentStore from "../../stores/DepartmentStore";
 import useStatusStore from "../../stores/StatusStore";
 import usePriorityStore from "../../stores/PriorityStore";
 import useEmployeeStore from "../../stores/EmployeeStore";
+import CustomDatePicker from "../../components/common/DatePicker";
+import useTaskStore from "../../stores/TaskStore";
 
 export default function CreateTask() {
   const { departments, fetchDepartments } = useDepartmentStore();
@@ -16,6 +18,7 @@ export default function CreateTask() {
   const { priorities, fetchPriorities } = usePriorityStore();
   const { employees, fetchEmployees } = useEmployeeStore();
 
+  const { addTask } = useTaskStore();
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState(null);
@@ -51,6 +54,19 @@ export default function CreateTask() {
       )
     : [];
 
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      await addTask(values);
+      setSelectedDepartment(null);
+      setSelectedStatus(null);
+      setSelectedPriority(null);
+      setSelectedEmployee(null);
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    }
+    setSubmitting(false);
+  };
   return (
     <div className="flex flex-col">
       <h2 className="font-firaGo font-bold text-[34px] leading-[100%] text-gray-headline mb-[25px]">
@@ -66,9 +82,10 @@ export default function CreateTask() {
             status_id: selectedStatus ? selectedStatus.id : "",
             priority_id: "",
             employee_id: "",
+            due_date: null,
           }}
           validationSchema={taskValidationSchema}
-          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           validateOnChange={true}
           validateOnBlur={true}
         >
@@ -81,115 +98,132 @@ export default function CreateTask() {
             setFieldValue,
           }) => (
             <Form>
-              <div className="flex gap-8 flex-col">
-                <Selector
-                  label="დეპარტამენტი"
-                  name="department_id"
-                  id="department_id"
-                  options={departments.map((department) => department.name)}
-                  selectedOption={
-                    selectedDepartment ? selectedDepartment.name : ""
-                  }
-                  onSelect={(name) => {
-                    const selected = departments.find(
-                      (department) => department.name === name
-                    );
-                    setSelectedDepartment(selected);
-                    setFieldValue("department_id", selected?.id || "");
-
-                    setSelectedEmployee(null);
-                    setFieldValue("employee_id", "");
-                  }}
-                  error={touched.department_id && errors.department_id}
-                  width="w-[550px]"
-                />
-
-                {selectedDepartment && (
+              <div>
+                <div className="flex flex-wrap gap-y-[55px] gap-x-[161px]">
+                  <Input
+                    label="სათაური"
+                    id="name"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.name}
+                    touched={touched.name}
+                    minLengthValidationText="მინიმუმ 2 სიმბოლო"
+                    maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
+                    width="w-[550px]"
+                  />
                   <Selector
-                    label="პასუხისმგებელი თანამშრომელი"
-                    name="employee_id"
-                    id="employee_id"
-                    options={filteredEmployees.map((employee) => employee.name)}
+                    label="დეპარტამენტი"
+                    name="department_id"
+                    id="department_id"
+                    options={departments.map((department) => department.name)}
                     selectedOption={
-                      selectedEmployee ? selectedEmployee.name : ""
+                      selectedDepartment ? selectedDepartment.name : ""
                     }
                     onSelect={(name) => {
-                      const selected = filteredEmployees.find(
-                        (employee) => employee.name === name
+                      const selected = departments.find(
+                        (department) => department.name === name
                       );
-                      setSelectedEmployee(selected);
-                      setFieldValue("employee_id", selected?.id || "");
-                    }}
-                    error={touched.employee_id && errors.employee_id}
-                    width="w-[550px]"
-                    showAddEmployeeOption={true}
-                  />
-                )}
-                <Selector
-                  label="სტატუსი"
-                  name="status_id"
-                  id="status_id"
-                  options={statuses.map((status) => status.name)}
-                  selectedOption={selectedStatus ? selectedStatus.name : ""}
-                  onSelect={(name) => {
-                    const selected = statuses.find(
-                      (status) => status.name === name
-                    );
-                    setSelectedStatus(selected);
-                    setFieldValue("status_id", selected?.id);
-                  }}
-                  error={touched.status_id && errors.status_id}
-                  width="w-[259px]"
-                />
-                <Selector
-                  label="პრიორიტეტი"
-                  name="priority_id"
-                  id="priority_id"
-                  options={priorities.map((priority) => priority.name)}
-                  selectedOption={selectedPriority ? selectedPriority.name : ""}
-                  onSelect={(name) => {
-                    const selected = priorities.find(
-                      (priority) => priority.name === name
-                    );
-                    setSelectedPriority(selected);
-                    setFieldValue("priority_id", selected?.id);
-                  }}
-                  error={touched.priority_id && errors.priority_id}
-                  width="w-[259px]"
-                />
+                      setSelectedDepartment(selected);
+                      setFieldValue("department_id", selected?.id || "");
 
-                <Input
-                  label="სათაური"
-                  id="name"
-                  name="name"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.name}
-                  touched={touched.name}
-                  minLengthValidationText="მინიმუმ 2 სიმბოლო"
-                  maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
-                  width="w-[550px]"
-                />
-                <TextArea
-                  label="აღწერა"
-                  id="description"
-                  name="description"
-                  value={values.description}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={errors.description}
-                  touched={touched.description}
-                  minLengthValidationText="მინიმუმ 4 სიმბოლო"
-                  maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
-                  width="550px"
-                />
+                      setSelectedEmployee(null);
+                      setFieldValue("employee_id", "");
+                    }}
+                    error={touched.department_id && errors.department_id}
+                    width="w-[550px]"
+                  />
+                  <TextArea
+                    label="აღწერა"
+                    id="description"
+                    name="description"
+                    value={values.description}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={errors.description}
+                    touched={touched.description}
+                    minLengthValidationText="მინიმუმ 4 სიმბოლო"
+                    maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
+                    width="550px"
+                  />
+
+                  {selectedDepartment && (
+                    <Selector
+                      label="პასუხისმგებელი თანამშრომელი"
+                      name="employee_id"
+                      id="employee_id"
+                      options={filteredEmployees.map(
+                        (employee) => employee.name
+                      )}
+                      selectedOption={
+                        selectedEmployee ? selectedEmployee.name : ""
+                      }
+                      onSelect={(name) => {
+                        const selected = filteredEmployees.find(
+                          (employee) => employee.name === name
+                        );
+                        setSelectedEmployee(selected);
+                        setFieldValue("employee_id", selected?.id || "");
+                      }}
+                      error={touched.employee_id && errors.employee_id}
+                      width="w-[550px]"
+                      showAddEmployeeOption={true}
+                    />
+                  )}
+                  <div className="flex gap-[161px] items-center">
+                    <div className="flex gap-[32px]">
+                      <Selector
+                        label="პრიორიტეტი"
+                        name="priority_id"
+                        id="priority_id"
+                        options={priorities.map((priority) => priority.name)}
+                        selectedOption={
+                          selectedPriority ? selectedPriority.name : ""
+                        }
+                        onSelect={(name) => {
+                          const selected = priorities.find(
+                            (priority) => priority.name === name
+                          );
+                          setSelectedPriority(selected);
+                          setFieldValue("priority_id", selected?.id);
+                        }}
+                        error={touched.priority_id && errors.priority_id}
+                        width="w-[259px]"
+                      />
+                      <Selector
+                        label="სტატუსი"
+                        name="status_id"
+                        id="status_id"
+                        options={statuses.map((status) => status.name)}
+                        selectedOption={
+                          selectedStatus ? selectedStatus.name : ""
+                        }
+                        onSelect={(name) => {
+                          const selected = statuses.find(
+                            (status) => status.name === name
+                          );
+                          setSelectedStatus(selected);
+                          setFieldValue("status_id", selected?.id);
+                        }}
+                        error={touched.status_id && errors.status_id}
+                        width="w-[259px]"
+                      />
+                    </div>
+                    <CustomDatePicker
+                      value={values.due_date}
+                      onChange={(date) => setFieldValue("due_date", date)}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-end w-[1261px] mt-[145px]">
+                  <Button
+                    variant="primary"
+                    title="დავალების შექმნა"
+                    type="submit"
+                  />
+                </div>
               </div>
-              <Button
-                variant="primary"
-                title="დავალების შექმნა"
-                type="submit"
-              />
             </Form>
           )}
         </Formik>

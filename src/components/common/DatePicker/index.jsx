@@ -1,38 +1,38 @@
-import * as React from "react";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { addDays } from "date-fns";
+import "../../../styles/datePicker.css";
 
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+const CustomDatePicker = ({ value, onChange }) => {
+  const [selectedDate, setSelectedDate] = useState(
+    value || addDays(new Date(), 1)
+  );
 
-export default function CustomMUIDatePicker({ hasError, success }) {
-  const [value, setValue] = React.useState(null);
+  const handleChange = (date) => {
+    setSelectedDate(date);
+    onChange(date);
+  };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker
-        label="თარიღი"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            fullWidth
-            variant="outlined"
-            error={hasError}
-            helperText={hasError ? "Invalid date" : ""}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderColor: hasError
-                  ? "#e53e3e"
-                  : success
-                  ? "#38a169"
-                  : "#DEE2E6",
-              },
-            }}
-          />
-        )}
-      />
-    </LocalizationProvider>
+    <div className="flex flex-col gap-[6px]">
+      <label className="font-firaGo font-bold text-[14px] text-gray-subheadline leading-[100%]">
+        დედლაინი
+      </label>
+
+      <div className="relative">
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleChange}
+          minDate={addDays(new Date(), 1)}
+          dateFormat="dd/MM/yyyy"
+          className="w-[314px] p-[14px] border h-[45px] border-borderGray text-gray-greyish text-[14px] text-firaGo leading-[20px] rounded-[5px] focus:outline-none"
+          popperPlacement="bottom-start"
+          popperClassName="z-50 custom-datepicker"
+        />
+      </div>
+    </div>
   );
-}
+};
+
+export default CustomDatePicker;

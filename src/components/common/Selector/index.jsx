@@ -40,16 +40,16 @@ export default function Selector({
   const hasError = !selectedOption && error;
 
   return (
-    <div className="flex flex-col gap-[5px]">
+    <div className="flex flex-col gap-[6px]">
       {label && (
         <label
           htmlFor={id}
-          className="font-firaGo font-bold text-[14px] text-gray-subheadline"
+          className="font-firaGo font-bold text-[14px] text-gray-subheadline leading-[100%]"
         >
           {label}
         </label>
       )}
-      <div className="relative ">
+      <div className="relative">
         <button
           type="button"
           onClick={toggleDropdown}

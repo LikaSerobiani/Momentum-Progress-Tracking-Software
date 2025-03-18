@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
-import "../../../styles/datePicker.css";
 
 const CustomDatePicker = ({ value, onChange }) => {
   const [selectedDate, setSelectedDate] = useState(

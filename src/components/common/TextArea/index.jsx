@@ -16,7 +16,7 @@ export default function Textarea({
   disableValidation = false,
   width = "100%",
   placeholder,
-  showSubmitButton = false,
+  showCommentButton = false,
   onSubmit,
   borderRadius = "6px",
 }) {
@@ -52,7 +52,7 @@ export default function Textarea({
           }}
         ></textarea>
 
-        {showSubmitButton && (
+        {showCommentButton && (
           <Button
             title="დააკომენტარე"
             type="button"

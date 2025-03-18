@@ -12,9 +12,10 @@ export default function Textarea({
   minLengthValidationText,
   touched,
   maxLengthValidationText,
+  disableValidation = false,
 }) {
-  const hasError = error;
-  const isValid = !hasError && value.length > 0;
+  const hasError = !disableValidation && error;
+  const isValid = !disableValidation && !hasError && value.length > 0;
 
   return (
     <div className="flex flex-col gap-[5px]">
@@ -27,7 +28,9 @@ export default function Textarea({
         onChange={onChange}
         onBlur={onBlur}
         className={`w-[550px] h-[135px] p-[10px] gap-[10px] rounded-[6px] border ${
-          hasError
+          disableValidation
+            ? "border-borderGray"
+            : hasError
             ? "border-red"
             : isValid
             ? "border-green"
@@ -36,48 +39,59 @@ export default function Textarea({
         style={{ resize: "none", outline: "none" }}
       ></textarea>
 
-      <div className="text-[10px] font-firaGo">
-        {!isValid && !hasError && !touched && (
-          <>
-            <div className="flex items-center gap-1">
-              <CheckIcon color="#6C757D" />
-              <span className="text-gray-validation">
-                {minLengthValidationText}
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              <CheckIcon color="#6C757D" />
-              <span className="text-gray-validation">
-                {maxLengthValidationText}
-              </span>
-            </div>
-          </>
-        )}
+      {!disableValidation && (
+        <div className="text-[10px] font-firaGo">
+          {!isValid && !hasError && !touched && (
+            <>
+              <div className="flex items-center gap-1">
+                <CheckIcon color="#6C757D" />
+                <span className="text-gray-validation">
+                  {minLengthValidationText}
+                </span>
+              </div>
+              <div className="flex items-center gap-1">
+                <CheckIcon color="#6C757D" />
+                <span className="text-gray-validation">
+                  {maxLengthValidationText}
+                </span>
+              </div>
+            </>
+          )}
 
-        {isValid && !hasError && (
-          <>
-            <div className="flex items-center gap-1">
-              <CheckIcon color="#45A849" />
-              <span className="text-green">{minLengthValidationText}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <CheckIcon color="#45A849" />
-              <span className="text-green">{maxLengthValidationText}</span>
-            </div>
-          </>
-        )}
+          {isValid && !hasError && (
+            <>
+              <div className="flex items-center gap-1">
+                <CheckIcon color="#45A849" />
+                <span className="text-green">{minLengthValidationText}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <CheckIcon color="#45A849" />
+                <span className="text-green">{maxLengthValidationText}</span>
+              </div>
+            </>
+          )}
 
-        {hasError && (
-          <div className="flex items-center gap-1">
-            <ExclamationMarkIcon color="#F93B1D" />
-            <span className="text-red">{error}</span>
-          </div>
-        )}
-      </div>
+          {hasError && (
+            <div className="flex items-center gap-1">
+              <ExclamationMarkIcon color="#F93B1D" />
+              <span className="text-red">{error}</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
+
 Textarea.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  error: PropTypes.string,
+  minLengthValidationText: PropTypes.string,
+  maxLengthValidationText: PropTypes.string,
+  touched: PropTypes.bool,
+  disableValidation: PropTypes.bool,
 };

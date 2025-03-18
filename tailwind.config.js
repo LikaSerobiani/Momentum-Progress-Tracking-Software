@@ -22,7 +22,7 @@ export default {
           100: "#DEE2E6", // 10%
           200: "#474747", // 15%
           300: "#ADB5BD", // 20%
-          greyish: "",
+          greyish: "#ADB5BD",
           headline: "#212529",
           validation: "#6C757D",
           subheadline: "#343A40",

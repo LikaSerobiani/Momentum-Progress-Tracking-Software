@@ -42,8 +42,9 @@ export default function Card({
         <h3 className="text-[15px] font-bold leading-[100%] text-firaGo text-gray-headline">
           {name}
         </h3>
+
         <p className="text-[14px] text-firaGo text-gray-subheadline">
-          {description.length > 100
+          {description?.length > 100
             ? `${description.substring(0, 100)}...`
             : description}
         </p>

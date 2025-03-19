@@ -11,6 +11,8 @@ import TaskList from "./pages/tasks/TaskList";
 import TaskDetails from "./pages/tasks/TaskDetails";
 import CreateTask from "./pages/tasks/CreateTask";
 
+import { ToastContainer } from "react-toastify";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -25,7 +27,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;

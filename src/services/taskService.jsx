@@ -1,4 +1,5 @@
 import axios from "./axios";
+import { toast } from "react-toastify";
 
 export const fetchTasks = async () => {
   try {
@@ -25,6 +26,8 @@ export const addTask = async (task) => {
         "Content-Type": "multipart/form-data",
       },
     });
+    toast.success("დავალება წარმატებულად დაემატა!");
+
     return response.data;
   } catch (error) {
     throw new Error("Error adding task");

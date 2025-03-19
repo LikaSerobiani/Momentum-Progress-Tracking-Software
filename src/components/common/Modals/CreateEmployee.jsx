@@ -6,14 +6,12 @@ import Modal from "../Modals/Modal";
 import Input from "../Input";
 import CloseIcon from "../Icons/Close";
 import useEmployeeStore from "../../../stores/EmployeeStore";
-import SuccessModal from "./Success";
 import { employeeValidationSchema } from "../../../validation/employeeValidationSchema";
 import useDepartmentStore from "../../../stores/DepartmentStore";
 import Selector from "../Selector";
 
 export default function CreateEmployee({ showModal, handleClose }) {
   const { addEmployee } = useEmployeeStore();
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const { departments, fetchDepartments } = useDepartmentStore();
   const [selectedDepartment, setSelectedDepartment] = useState(null);
@@ -40,11 +38,8 @@ export default function CreateEmployee({ showModal, handleClose }) {
       await addEmployee(values);
       resetForm();
       handleClose();
-      setShowSuccessModal(true);
+
       setSelectedDepartment(null);
-      setTimeout(() => {
-        setShowSuccessModal(false);
-      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -53,11 +48,6 @@ export default function CreateEmployee({ showModal, handleClose }) {
 
   return (
     <>
-      <SuccessModal
-        title="თანამშრომელი წარმატებულად დაემატა"
-        showModal={showSuccessModal}
-        handleClose={() => setShowSuccessModal(false)}
-      />
       <Modal isModalOpen={showModal} onClose={handleModalClose} padding="50px">
         <div className="flex justify-end mb-[37px] cursor-pointer">
           <button onClick={handleModalClose}>

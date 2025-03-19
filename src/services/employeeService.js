@@ -1,5 +1,6 @@
 import axios from "./axios";
 import useEmployeeStore from "../stores/EmployeeStore";
+import { toast } from "react-toastify";
 
 export const addEmployee = async (employee) => {
   const { fetchEmployees } = useEmployeeStore.getState();
@@ -13,9 +14,10 @@ export const addEmployee = async (employee) => {
 
     await fetchEmployees();
 
+    toast.success("თანამშრომელი წარმატებულად დაემატა!");
     return response.data;
   } catch (error) {
-    throw new Error("Error adding employee");
+    throw new Error("Error adding employees");
   }
 };
 

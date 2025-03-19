@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Check from "../Icons/Check";
 
-const Checkbox = ({ id, label, checked = false, onChange }) => {
+const Checkbox = ({ id, label, checked = false, onChange, avatar = "" }) => {
   const [isChecked, setIsChecked] = useState(checked);
 
   const handleCheckboxChange = () => {
@@ -22,6 +22,14 @@ const Checkbox = ({ id, label, checked = false, onChange }) => {
           </div>
         )}
       </div>
+      {avatar && (
+        <img
+          src={avatar}
+          alt={label}
+          className="w-7 h-7 rounded-full mr-1 object-cover"
+        />
+      )}
+
       {label && (
         <label
           htmlFor={id}

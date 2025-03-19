@@ -13,12 +13,22 @@ import CustomDatePicker from "../../components/common/DatePicker";
 import useTaskStore from "../../stores/TaskStore";
 
 export default function CreateTask() {
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    description: "",
+    department_id: "",
+    status_id: "",
+    priority_id: "",
+    employee_id: "",
+    due_date: null,
+  });
+
+  const { addTask } = useTaskStore();
   const { departments, fetchDepartments } = useDepartmentStore();
   const { statuses, fetchStatuses } = useStatusStore();
   const { priorities, fetchPriorities } = usePriorityStore();
   const { employees, fetchEmployees } = useEmployeeStore();
 
-  const { addTask } = useTaskStore();
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState(null);
@@ -45,6 +55,11 @@ export default function CreateTask() {
         (status) => status.name === "დასაწყები"
       );
       setSelectedStatus(defaultStatus);
+
+      setInitialValues((prev) => ({
+        ...prev,
+        status_id: defaultStatus ? defaultStatus.id : "",
+      }));
     }
   }, [statuses, selectedStatus]);
 
@@ -57,6 +72,7 @@ export default function CreateTask() {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       await addTask(values);
+
       setSelectedDepartment(null);
       setSelectedStatus(null);
       setSelectedPriority(null);
@@ -75,19 +91,12 @@ export default function CreateTask() {
 
       <div className="bg-[#FBF9FFA6]  border-[0.3px] border-[#DDD2FF] rounded-[4px] py-16 px-14">
         <Formik
-          initialValues={{
-            name: "",
-            description: "",
-            department_id: "",
-            status_id: selectedStatus ? selectedStatus.id : "",
-            priority_id: "",
-            employee_id: "",
-            due_date: null,
-          }}
+          initialValues={initialValues}
           validationSchema={taskValidationSchema}
           onSubmit={handleSubmit}
           validateOnChange={true}
           validateOnBlur={true}
+          enableReinitialize={true}
         >
           {({
             values,

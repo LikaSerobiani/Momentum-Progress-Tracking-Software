@@ -6,7 +6,7 @@ const Button = ({
   type = "button",
   children,
 }) => {
-  const baseStyle = "font-firaGo flex items-center gap-2 leading-[100%]";
+  const baseStyle = "font-firaGo flex items-center  gap-2 leading-[100%]";
 
   const variants = {
     primary: `
@@ -21,7 +21,7 @@ const Button = ({
       active:scale-95
     `,
     roundedFull: `
-      bg-primary text-white rounded-[20px] py-[8px] px-[20px] font-medium text-[16px] hover:bg-secondary w-[155px]`,
+      bg-primary text-white rounded-[20px] py-[8px] px-[20px] font-medium text-[16px] hover:bg-secondary w-[155px] justify-center`,
     reply: `text-primary text-[12px] hover:text-secondary font-bold`,
   };
 

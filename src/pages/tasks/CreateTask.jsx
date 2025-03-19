@@ -132,8 +132,7 @@ export default function CreateTask() {
                       value={values.name}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      error={errors.name}
-                      touched={touched.name}
+                      error={touched.name && errors.name}
                       minLengthValidationText="მინიმუმ 2 სიმბოლო"
                       maxLengthValidationText="მაქსიმუმ 255 სიმბოლო"
                       width="w-[550px]"

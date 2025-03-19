@@ -83,6 +83,9 @@ export default function CreateTask() {
     }
     setSubmitting(false);
   };
+
+  const filteredStatuses = statuses.filter((status) => status.id !== 4);
+
   return (
     <div className="flex flex-col">
       <h2 className="font-firaGo font-bold text-[34px] leading-[100%] text-gray-headline mb-[25px]">
@@ -204,7 +207,7 @@ export default function CreateTask() {
                         label="სტატუსი"
                         name="status_id"
                         id="status_id"
-                        options={statuses.map((status) => status.name)}
+                        options={filteredStatuses.map((status) => status.name)}
                         selectedOption={
                           selectedStatus ? selectedStatus.name : ""
                         }

@@ -11,4 +11,6 @@ export const taskValidationSchema = Yup.object().shape({
   department_id: Yup.string().required("დეპარტამენტის არჩევა სავალდებულოა"),
   status_id: Yup.string().required("სტატუსის არჩევა სავალდებულოა"),
   priority_id: Yup.string().required("პრიორიტეტის არჩევა სავალდებულოა"),
+  employee_id: Yup.string().required("თანამშრომლის არჩევა სავალდებულოა"),
+  due_date: Yup.date().required("დედლაინი სავალდებულოა"),
 });

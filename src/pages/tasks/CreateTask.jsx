@@ -3,6 +3,8 @@ import TextArea from "../../components/common/TextArea";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import { Formik, Form } from "formik";
+import { useNavigate } from "react-router-dom";
+
 import { taskValidationSchema } from "../../validation/taskValidationSchema";
 import Selector from "../../components/common/Selector";
 import useDepartmentStore from "../../stores/DepartmentStore";
@@ -29,6 +31,7 @@ export default function CreateTask() {
   const { statuses, fetchStatuses } = useStatusStore();
   const { priorities, fetchPriorities } = usePriorityStore();
   const { employees, fetchEmployees } = useEmployeeStore();
+  const navigate = useNavigate();
 
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
@@ -74,6 +77,7 @@ export default function CreateTask() {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       await addTask(values);
+      navigate("/");
 
       setSelectedDepartment(null);
       setSelectedStatus(null);

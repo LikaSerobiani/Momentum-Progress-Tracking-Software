@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
 
 const CustomDatePicker = ({ value, onChange }) => {
-  const [selectedDate, setSelectedDate] = useState(
-    value || addDays(new Date(), 1)
-  );
+  const defaultDate = addDays(new Date(), 1);
+
+  useEffect(() => {
+    if (!value) {
+      onChange(defaultDate);
+    }
+  }, [value, onChange, defaultDate]);
 
   const handleChange = (date) => {
-    setSelectedDate(date);
     onChange(date);
   };
 
@@ -21,9 +24,9 @@ const CustomDatePicker = ({ value, onChange }) => {
 
       <div className="relative">
         <DatePicker
-          selected={selectedDate}
+          selected={value || defaultDate}
           onChange={handleChange}
-          minDate={addDays(new Date(), 1)}
+          minDate={defaultDate}
           dateFormat="dd/MM/yyyy"
           className="w-[314px] p-[14px] border h-[45px] border-borderGray text-gray-greyish text-[14px] text-firaGo leading-[20px] rounded-[5px] focus:outline-none"
           popperPlacement="bottom-start"

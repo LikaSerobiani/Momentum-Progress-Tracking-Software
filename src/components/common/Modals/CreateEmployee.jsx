@@ -115,7 +115,7 @@ export default function CreateEmployee({ showModal, handleClose }) {
                   label="დეპარტამენტი"
                   name="department_id"
                   id="department_id"
-                  options={departments.map((department) => department.name)}
+                  options={departments}
                   selectedOption={
                     selectedDepartment ? selectedDepartment.name : ""
                   }

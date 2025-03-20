@@ -14,39 +14,42 @@ export default function Selector({
   id,
   width = "w-[100%]",
   showAddEmployeeOption = false,
-  onOpenModal,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleSelect = (option) => {
     if (option === "დაამატე თანამშრომელი") {
-      onOpenModal();
       handleDefaultOptionSelect();
     } else {
-      onSelect(option);
+      onSelect(option.name);
       setIsOpen(false);
     }
   };
 
   const handleDefaultOptionSelect = () => {
+    handleShow();
     setIsOpen(false);
   };
 
   const hasError = !selectedOption && error;
 
   return (
-    <div className="flex flex-col gap-[6px]">
+    <div className="flex flex-col gap-[5px]">
       {label && (
         <label
           htmlFor={id}
-          className="font-firaGo font-bold text-[14px] text-gray-subheadline leading-[100%]"
+          className="font-firaGo font-bold text-[14px] text-gray-subheadline"
         >
           {label}
         </label>
       )}
-      <div className="relative">
+      <div className="relative ">
         <button
           type="button"
           onClick={toggleDropdown}
@@ -77,14 +80,27 @@ export default function Selector({
               </button>
             )}
 
-            {/* Other Options */}
             {options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleSelect(option)}
                 className="text-gray-blackish font-firaGo w-full flex p-[10px] gap-[10px] text-[14px] hover:bg-gray-10"
               >
-                {option}
+                {option.icon ? (
+                  <img
+                    src={option.icon}
+                    className="w-7 h-7 mr-[6px] rounded-full"
+                    alt={option.name}
+                  />
+                ) : option.avatar ? (
+                  <img
+                    src={option.avatar}
+                    className="w-7 h-7 mr-[6px] rounded-full"
+                    alt={option.name}
+                  />
+                ) : null}
+                {option.name}
+                {option.surname && <span>{option.surname}</span>}
               </button>
             ))}
           </div>
@@ -96,6 +112,7 @@ export default function Selector({
           <span>{error}</span>
         </div>
       )}
+      <CreateEmployeeModal showModal={showModal} handleClose={handleClose} />
     </div>
   );
 }

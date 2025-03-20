@@ -141,7 +141,7 @@ export default function CreateTask() {
                       label="დეპარტამენტი"
                       name="department_id"
                       id="department_id"
-                      options={departments.map((department) => department.name)}
+                      options={departments}
                       selectedOption={
                         selectedDepartment ? selectedDepartment.name : ""
                       }
@@ -177,9 +177,7 @@ export default function CreateTask() {
                         label="პასუხისმგებელი თანამშრომელი"
                         name="employee_id"
                         id="employee_id"
-                        options={filteredEmployees.map(
-                          (employee) => employee.name
-                        )}
+                        options={filteredEmployees}
                         selectedOption={
                           selectedEmployee ? selectedEmployee.name : ""
                         }
@@ -202,7 +200,7 @@ export default function CreateTask() {
                           label="პრიორიტეტი"
                           name="priority_id"
                           id="priority_id"
-                          options={priorities.map((priority) => priority.name)}
+                          options={priorities}
                           selectedOption={
                             selectedPriority ? selectedPriority.name : ""
                           }
@@ -220,9 +218,7 @@ export default function CreateTask() {
                           label="სტატუსი"
                           name="status_id"
                           id="status_id"
-                          options={filteredStatuses.map(
-                            (status) => status.name
-                          )}
+                          options={filteredStatuses}
                           selectedOption={
                             selectedStatus ? selectedStatus.name : ""
                           }

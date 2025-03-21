@@ -1,8 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import Gallery from "../Icons/Gallery";
-import TrashCircle from "../Icons/TrashCircle";
-import ExclamationMark from "../Icons/ExclamationMark";
+import Gallery from "../icons/Gallery";
+import TrashCircle from "../icons/TrashCircle";
+import ExclamationMark from "../icons/ExclamationMark";
 
 const FileUploader = ({ onFileChange, error }) => {
   const [file, setFile] = useState(null);

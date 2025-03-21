@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PlusCircle from "../Icons/PlusCircle";
-import ExclamationMark from "../Icons/ExclamationMark";
+import PlusCircle from "../icons/PlusCircle";
+import ExclamationMark from "../icons/ExclamationMark";
 
 export default function Selector({
   label,

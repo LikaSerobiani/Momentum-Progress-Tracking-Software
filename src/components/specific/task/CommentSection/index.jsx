@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useCommentStore from "../../../../stores/CommentStore";
 import Textarea from "../../../common/TextArea";
 import Button from "../../../common/Button";
-import LeftIcon from "../../../common/Icons/Left";
+import LeftIcon from "../../../common/icons/Left";
 
 const CommentSection = ({ taskId }) => {
   const { comments, fetchComments, addComment } = useCommentStore();

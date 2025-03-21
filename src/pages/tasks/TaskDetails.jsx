@@ -9,8 +9,8 @@ import Selector from "../../components/common/Selector";
 import useTaskStore from "../../stores/TaskStore";
 import useStatusStore from "../../stores/StatusStore";
 import UserIcon from "../../components/common/icons/User";
-import CalendarIcon from "../../components/common/Icons/Calendar";
-import PieChartIcon from "../../components/common/Icons/PieChart";
+import CalendarIcon from "../../components/common/icons/Calendar";
+import PieChartIcon from "../../components/common/icons/PieChart";
 import CommentSection from "../../components/specific/task/CommentSection";
 
 export default function TaskDetails() {

@@ -1,6 +1,6 @@
 import React from "react";
-import ExclamationMarkIcon from "../Icons/ExclamationMark";
-import CheckIcon from "../Icons/Check";
+import ExclamationMarkIcon from "../icons/ExclamationMark";
+import CheckIcon from "../icons/Check";
 import PropTypes from "prop-types";
 
 export default function Input({

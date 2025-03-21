@@ -4,7 +4,7 @@ import Button from "../Button";
 import FileUploader from "../FileUploader";
 import Modal from "../Modals/Modal";
 import Input from "../Input";
-import CloseIcon from "../Icons/Close";
+import CloseIcon from "../icons/Close";
 import useEmployeeStore from "../../../stores/EmployeeStore";
 import { employeeValidationSchema } from "../../../validation/employeeValidationSchema";
 import useDepartmentStore from "../../../stores/DepartmentStore";

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import ExclamationMarkIcon from "../Icons/ExclamationMark";
-import CheckIcon from "../Icons/Check";
+import ExclamationMarkIcon from "../icons/ExclamationMark";
+import CheckIcon from "../icons/Check";
 import Button from "../Button";
 
 export default function Textarea({

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import FilterMenu from "./FilterMenu";
 import Dropdown from "../../common/Dropdown";
 import Button from "../../common/Button";
-import XIcon from "../../common/Icons/XIcon";
+import XIcon from "../../common/icons/XIcon";
 
 const FilterComponent = ({
   onFilter,

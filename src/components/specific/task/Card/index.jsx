@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { formatDueDate } from "../../../../utils/dateUtils";
 import DepartmentTag from "../DepartmentTag";
 import PriorityTag from "../PriorityTag";
-import CommentIcon from "../../../common/Icons/Comment";
+import CommentIcon from "../../../common/icons/Comment";
 
 export default function Card({
   id,

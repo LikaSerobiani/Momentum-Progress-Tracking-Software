@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import Check from "../Icons/Check";
+import Check from "../icons/Check";
 
 const Checkbox = ({ id, label, checked = false, onChange, avatar = "" }) => {
   const [isChecked, setIsChecked] = useState(checked);

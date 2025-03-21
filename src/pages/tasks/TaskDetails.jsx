@@ -8,7 +8,7 @@ import Loading from "../../components/common/Loading";
 import Selector from "../../components/common/Selector";
 import useTaskStore from "../../stores/TaskStore";
 import useStatusStore from "../../stores/StatusStore";
-import UserIcon from "../../components/common/Icons/User";
+import UserIcon from "../../components/common/icons/User";
 import CalendarIcon from "../../components/common/Icons/Calendar";
 import PieChartIcon from "../../components/common/Icons/PieChart";
 import CommentSection from "../../components/specific/task/CommentSection";

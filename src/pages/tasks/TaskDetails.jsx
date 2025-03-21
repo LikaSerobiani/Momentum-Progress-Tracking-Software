@@ -35,18 +35,17 @@ export default function TaskDetails() {
 
   useEffect(() => {
     if (currentTask && currentTask.status) {
-      setSelectedStatus(currentTask.status.name);
+      setSelectedStatus(currentTask.status);
     }
   }, [currentTask]);
 
   const handleStatusChange = async (newStatus) => {
-    const selectedStatusObj = statuses.find((s) => s.name === newStatus);
-    if (!selectedStatusObj) return;
+    if (!newStatus?.id) return;
 
     try {
-      await updateTaskStatus(id, selectedStatusObj.id);
+      await updateTaskStatus(id, newStatus.id);
       fetchCurrentTask(id);
-      setSelectedStatus(newStatus);
+      setSelectedStatus(newStatus.id);
     } catch (error) {
       console.error("Failed to update task status:", error.message);
     }
@@ -99,7 +98,7 @@ export default function TaskDetails() {
               <Selector
                 name="status_id"
                 id="status_id"
-                options={statuses.map((status) => status.name)}
+                options={statuses.map((status) => status)}
                 selectedOption={selectedStatus}
                 onSelect={handleStatusChange}
                 width="w-[259px]"

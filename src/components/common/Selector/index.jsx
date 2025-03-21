@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ArrowDown from "../Icons/ArrowDown";
 import PlusCircle from "../Icons/PlusCircle";
 import CreateEmployeeModal from "../Modals/CreateEmployee";
 import ExclamationMark from "../Icons/ExclamationMark";

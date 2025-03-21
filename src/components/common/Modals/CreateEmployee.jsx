@@ -116,13 +116,8 @@ export default function CreateEmployee({ showModal, handleClose }) {
                   name="department_id"
                   id="department_id"
                   options={departments}
-                  selectedOption={
-                    selectedDepartment ? selectedDepartment.name : ""
-                  }
-                  onSelect={(name) => {
-                    const selected = departments.find(
-                      (department) => department.name === name
-                    );
+                  selectedOption={selectedDepartment}
+                  onSelect={(selected) => {
                     setSelectedDepartment(selected);
                     setFieldValue("department_id", selected?.id);
                   }}

@@ -142,13 +142,8 @@ export default function CreateTask() {
                       name="department_id"
                       id="department_id"
                       options={departments}
-                      selectedOption={
-                        selectedDepartment ? selectedDepartment.name : ""
-                      }
-                      onSelect={(name) => {
-                        const selected = departments.find(
-                          (department) => department.name === name
-                        );
+                      selectedOption={selectedDepartment}
+                      onSelect={(selected) => {
                         setSelectedDepartment(selected);
                         setFieldValue("department_id", selected?.id || "");
 
@@ -178,13 +173,8 @@ export default function CreateTask() {
                         name="employee_id"
                         id="employee_id"
                         options={filteredEmployees}
-                        selectedOption={
-                          selectedEmployee ? selectedEmployee.name : ""
-                        }
-                        onSelect={(name) => {
-                          const selected = filteredEmployees.find(
-                            (employee) => employee.name === name
-                          );
+                        selectedOption={selectedEmployee}
+                        onSelect={(selected) => {
                           setSelectedEmployee(selected);
                           setFieldValue("employee_id", selected?.id || "");
                         }}
@@ -201,31 +191,22 @@ export default function CreateTask() {
                           name="priority_id"
                           id="priority_id"
                           options={priorities}
-                          selectedOption={
-                            selectedPriority ? selectedPriority.name : ""
-                          }
-                          onSelect={(name) => {
-                            const selected = priorities.find(
-                              (priority) => priority.name === name
-                            );
+                          selectedOption={selectedPriority}
+                          onSelect={(selected) => {
                             setSelectedPriority(selected);
                             setFieldValue("priority_id", selected?.id);
                           }}
                           error={touched.priority_id && errors.priority_id}
                           width="w-[259px]"
                         />
+
                         <Selector
                           label="სტატუსი"
                           name="status_id"
                           id="status_id"
                           options={filteredStatuses}
-                          selectedOption={
-                            selectedStatus ? selectedStatus.name : ""
-                          }
-                          onSelect={(name) => {
-                            const selected = statuses.find(
-                              (status) => status.name === name
-                            );
+                          selectedOption={selectedStatus}
+                          onSelect={(selected) => {
                             setSelectedStatus(selected);
                             setFieldValue("status_id", selected?.id);
                           }}

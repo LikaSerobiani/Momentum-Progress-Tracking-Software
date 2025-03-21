@@ -27,7 +27,7 @@ export default function Selector({
     if (option === "დაამატე თანამშრომელი") {
       handleDefaultOptionSelect();
     } else {
-      onSelect(option.name);
+      onSelect(option);
       setIsOpen(false);
     }
   };
@@ -49,7 +49,7 @@ export default function Selector({
           {label}
         </label>
       )}
-      <div className="relative ">
+      <div className="relative">
         <button
           type="button"
           onClick={toggleDropdown}
@@ -59,9 +59,26 @@ export default function Selector({
             isOpen ? "rounded-t-[5px]" : "rounded-[5px]"
           }`}
         >
-          <span className="font-firaGo text-[14px] text-gray-blackish leading-[100%]">
-            {selectedOption || "აირჩიე"}
-          </span>
+          {selectedOption ? (
+            <div className="flex items-center gap-[10px]">
+              {selectedOption.icon ? (
+                <img src={selectedOption.icon} alt={selectedOption.name} />
+              ) : selectedOption.avatar ? (
+                <img
+                  src={selectedOption.avatar}
+                  className="w-[28px] h-[28px] rounded-full"
+                  alt={selectedOption.name}
+                />
+              ) : null}
+              <span className="font-firaGo text-[14px] text-gray-blackish leading-[100%]">
+                {selectedOption.name} {selectedOption.surname || ""}
+              </span>
+            </div>
+          ) : (
+            <span className="font-firaGo text-[14px] text-gray-blackish leading-[100%]">
+              აირჩიე
+            </span>
+          )}
           <ArrowDown />
         </button>
 
@@ -73,7 +90,7 @@ export default function Selector({
             {showAddEmployeeOption && (
               <button
                 onClick={() => handleSelect("დაამატე თანამშრომელი")}
-                className="font-firaGo w-full flex items-center p-[10px] gap-[10px] text-[14px] text-primary hover:bg-gray-10"
+                className="font-firaGo w-full flex items-center p-[14px] gap-[10px] text-[14px] text-primary hover:bg-gray-10"
               >
                 <PlusCircle />
                 <span>დაამატე თანამშრომელი</span>
@@ -84,23 +101,29 @@ export default function Selector({
               <button
                 key={index}
                 onClick={() => handleSelect(option)}
-                className="text-gray-blackish font-firaGo w-full flex p-[10px] gap-[10px] text-[14px] hover:bg-gray-10"
+                className="text-gray-blackish font-firaGo w-full flex p-[14px] gap-[10px] text-[14px] hover:bg-gray-10 items-center min-h-[40px]"
               >
                 {option.icon ? (
                   <img
                     src={option.icon}
-                    className="w-7 h-7 mr-[6px] rounded-full"
+                    className="w-[20px] h-[20px] object-contain"
                     alt={option.name}
                   />
                 ) : option.avatar ? (
                   <img
                     src={option.avatar}
-                    className="w-7 h-7 mr-[6px] rounded-full"
+                    className="w-[28px] h-[28px] rounded-full object-cover"
                     alt={option.name}
                   />
                 ) : null}
-                {option.name}
-                {option.surname && <span>{option.surname}</span>}
+                <span className="font-firaGo text-[14px] text-gray-blackish leading-[100%]">
+                  {option.name}
+                </span>
+                {option.surname && (
+                  <span className="font-firaGo text-[14px] text-gray-blackish leading-[100%]">
+                    {option.surname}
+                  </span>
+                )}
               </button>
             ))}
           </div>

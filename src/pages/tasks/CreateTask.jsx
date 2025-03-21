@@ -70,7 +70,9 @@ export default function CreateTask() {
 
   const filteredEmployees = selectedDepartment
     ? employees.filter(
-        (employee) => employee.department?.id === selectedDepartment?.id
+        (employee) =>
+          employee.department &&
+          employee.department.id === selectedDepartment?.id
       )
     : [];
 

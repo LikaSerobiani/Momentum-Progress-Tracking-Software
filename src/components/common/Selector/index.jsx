@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PlusCircle from "../Icons/PlusCircle";
-import CreateEmployeeModal from "../Modals/CreateEmployee";
 import ExclamationMark from "../Icons/ExclamationMark";
 
 export default function Selector({
@@ -13,17 +12,15 @@ export default function Selector({
   id,
   width = "w-[100%]",
   showAddEmployeeOption = false,
+  onOpenModal,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShow = () => setShowModal(true);
-  const handleClose = () => setShowModal(false);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleSelect = (option) => {
     if (option === "დაამატე თანამშრომელი") {
+      onOpenModal();
       handleDefaultOptionSelect();
     } else {
       onSelect(option);
@@ -32,7 +29,6 @@ export default function Selector({
   };
 
   const handleDefaultOptionSelect = () => {
-    handleShow();
     setIsOpen(false);
   };
 
@@ -149,7 +145,6 @@ export default function Selector({
           <span>{error}</span>
         </div>
       )}
-      <CreateEmployeeModal showModal={showModal} handleClose={handleClose} />
     </div>
   );
 }
